@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".Login">
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:elevation="5.1dp"
+            android:text="Create New Task"
+            android:textColor="#FFFDD0"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
+            android:hint="Title"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="text"
+            android:id="@+id/txtTitle"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:hint="Description"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="text"
+            android:id="@+id/txtDescription"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:hint="Start Date Time"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="text"
+            android:drawableRight="@drawable/icon_calendar_36"
+            android:id="@+id/txtStartDateTime"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:hint="End Date Time"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="18dp"
+            android:inputType="text"
+            android:drawableRight="@drawable/icon_calendar_36"
+            android:id="@+id/txtEndDateTime"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corner"
+            android:padding="30dp"
+            android:id="@+id/spinnerCategory"
+            />
+
+        <Button
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text="SAVE TASK"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:textColor="#3B84F1"
+            android:padding="18dp"
+            android:layout_marginTop="32dp"
+            android:textSize="24dp"
+            android:id="@+id/btnAddTask"/>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

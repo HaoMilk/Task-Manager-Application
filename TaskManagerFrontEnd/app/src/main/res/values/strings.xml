@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TaskManagerFrontEnd</string>
+    <string name="fab_add_description">Thêm mới</string>
+</resources>

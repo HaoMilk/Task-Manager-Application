@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Thêm màu nền cho shape -->
+    <solid android:color="#5F33E1"/> <!-- Màu cam -->
+
+    <!-- Thêm bo góc cho shape -->
+    <corners android:radius="20dp"/> <!-- Bo góc 16dp -->
+
+    <!-- Bạn cũng có thể thêm các thuộc tính khác như stroke để tạo viền -->
+    <stroke android:color="#000000" android:width="0.5dp"/> <!-- Viền đen rộng 2dp -->
+
+</shape>
