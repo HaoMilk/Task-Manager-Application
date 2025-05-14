@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F8F8F8" android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/project_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/rounded_pink_background" android:padding="6dp"
+        android:scaleType="fitCenter"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/project_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="#212121" android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/task_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tasks"
+            android:textColor="#757575" android:textSize="14sp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
+</LinearLayout>
