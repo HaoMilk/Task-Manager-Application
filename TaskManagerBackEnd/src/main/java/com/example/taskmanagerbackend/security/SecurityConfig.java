@@ -21,10 +21,10 @@ public class SecurityConfig {
         http
                 // Tắt CSRF cho các endpoint /api/auth/**
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/auth/**")  // Tắt CSRF cho tất cả các endpoint bắt đầu bằng /api/auth/
+                        .ignoringRequestMatchers("/api/**")  // Tắt CSRF cho tất cả các endpoint bắt đầu bằng /api/auth/
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()  // ✅ Cho phép login & register mà không cần xác thực
+                        .requestMatchers("/api/**").permitAll()  // ✅ Cho phép login & register mà không cần xác thực
                         .anyRequest().authenticated()  // 🔒 Các endpoint khác yêu cầu xác thực với token JWT
                 )
                 // Thêm JWT filter trước khi kiểm tra UsernamePasswordAuthenticationFilter

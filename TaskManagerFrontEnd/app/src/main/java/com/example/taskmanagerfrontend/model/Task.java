@@ -20,8 +20,7 @@ public class Task {
         this.description = description;
     }
 
-    public Task(Integer id, String title, String description, Date startDatetime, Date endDatetime, TaskStatus status, User user, TaskCategory category) {
-        this.id = id;
+    public Task(String title, String description, Date startDatetime, Date endDatetime, TaskStatus status, User user, TaskCategory category) {
         this.title = title;
         this.description = description;
         this.startDatetime = startDatetime;

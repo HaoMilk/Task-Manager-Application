@@ -10,12 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taskmanagerfrontend.R;  // Thay bằng package của bạn
+import com.example.taskmanagerfrontend.R;
 import com.bumptech.glide.Glide;
+import com.example.taskmanagerfrontend.model.TaskCategory;
 
 import java.util.List;
-
-import com.example.taskmanagerfrontend.model.TaskCategory;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
@@ -43,8 +42,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         if (category.getImageUrl() != null && !category.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(category.getImageUrl())
-                    .placeholder(R.drawable.ic_placeholder) // ảnh placeholder khi loading
-                    .error(R.drawable.ic_placeholder)             // ảnh lỗi
+                    .placeholder(R.drawable.ic_placeholder)
+                    .error(R.drawable.ic_placeholder)
                     .into(holder.projectIcon);
         } else {
             holder.projectIcon.setImageResource(R.drawable.ic_placeholder);
