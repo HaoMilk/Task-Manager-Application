@@ -18,86 +18,11 @@
 
 
         <ImageView
+            android:id="@+id/setImgAvt"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/icon_account_circle"/> <!-- Add your image resource here -->
+            android:src="@drawable/icon_account_circle" /> <!-- Add your image resource here -->
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="24dp"
-            android:hint="Username"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="text"
-            android:id="@+id/txtUsername"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="14dp"
-            android:hint="Email"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="text"
-            android:id="@+id/txtEmail"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="14dp"
-            android:hint="FirstName"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="text"
-            android:id="@+id/txtFirstName"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="14dp"
-            android:hint="LastName"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="text"
-            android:id="@+id/txtLastName"/>
-
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="14dp"
-            android:hint="Password"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner"
-            android:padding="18dp"
-            android:inputType="text"
-            android:id="@+id/txtPassword"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:text="Add avatar"
-            android:background="@drawable/img_avt_background"
-            android:textColor="#3B84F1"
-            android:padding="18dp"
-            android:layout_marginTop="14dp"
-            android:textSize="20sp"
-            android:src="@drawable/icon_image"/>
 
         <Button
             android:layout_width="match_parent"
@@ -109,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:id="@+id/btnSignUp"/>
+            android:id="@+id/btnUpdate"/>
 
 
     </LinearLayout>

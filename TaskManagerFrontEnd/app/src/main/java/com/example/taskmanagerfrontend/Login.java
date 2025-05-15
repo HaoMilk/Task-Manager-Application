@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
     public static String UserID;
+    public static String UserName;
 
     private EditText username, password;
     private Button loginBtn;
@@ -71,7 +72,8 @@ public class Login extends AppCompatActivity {
                             SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("userId", UserID);  // Lưu id người dùng
-                            editor.putString("token", token);  // Lưu token
+                            editor.putString("token", token);// Lưu token
+                            editor.putString("username", UserName);  // Lưu username")
                             editor.apply();  // Lưu thay đổi
 
                             // Chuyển sang màn hình Home

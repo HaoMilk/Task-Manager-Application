@@ -17,6 +17,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     int countByCategoryId(Long categoryId);
     // Query để lấy danh sách các tasks theo categoryId
     List<Task> findByCategoryId(int categoryId);    // Tìm Task theo ngày bắt đầu
+    int countByStatus(TaskStatus status);
     List<Task> findByStartDatetime(LocalDate startDatetime); // Thay vì findByStartDate
 }
 

@@ -19,8 +19,12 @@ public class UsersController {
 
     // API lấy danh sách người dùng
     @GetMapping
-    public List<User> getAllUsers() {
-        return usersRepository.findAll();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = usersRepository.findAll();
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     // API thêm mới người dùng
@@ -41,11 +45,13 @@ public class UsersController {
 
         if (userData.isPresent()) {
             User existingUser = userData.get();
+            // Cập nhật thông tin người dùng
             existingUser.setUsername(userDetails.getUsername());
             existingUser.setEmail(userDetails.getEmail());
             existingUser.setPassword(userDetails.getPassword());
             existingUser.setFirstName(userDetails.getFirstName());
             existingUser.setLastName(userDetails.getLastName());
+
             User updatedUser = usersRepository.save(existingUser);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } else {
@@ -64,5 +70,30 @@ public class UsersController {
         }
     }
 
+    // API lấy người dùng theo id
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        Optional<User> userData = usersRepository.findById(id);
 
+        if (userData.isPresent()) {
+            return new ResponseEntity<>(userData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // API cập nhật ảnh đại diện (avatar) của người dùng
+    @PutMapping("/{id}/avatar")
+    public ResponseEntity<User> updateAvatar(@PathVariable("id") Long id, @RequestBody String imageUrl) {
+        Optional<User> userData = usersRepository.findById(id);
+
+        if (userData.isPresent()) {
+            User user = userData.get();
+            user.setImageUrl(imageUrl); // Cập nhật ảnh đại diện
+            usersRepository.save(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

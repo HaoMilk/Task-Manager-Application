@@ -48,9 +48,9 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
 
+    // Đăng nhập người dùng
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User loginDetails) {
-        System.out.println("ABC");
         if (loginDetails.getUsername() == null || loginDetails.getUsername().isBlank() ||
                 loginDetails.getPassword() == null || loginDetails.getPassword().isBlank()) {
             return new ResponseEntity<>("Username and password are required", HttpStatus.BAD_REQUEST);
@@ -68,15 +68,15 @@ public class AuthController {
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful",
                     "token", token,
-                    "userId", user.getId()  // Trả về userId
+                    "userId", user.getId(),  // Trả về userId
+                    "username", user.getUsername()  // Trả về username
             ));
         } else {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
     }
 
-
-    // Cập nhật thông tin người dùng (bỏ mã hoá password)
+    // Cập nhật thông tin người dùng
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         Optional<User> userOptional = usersRepository.findById(id);

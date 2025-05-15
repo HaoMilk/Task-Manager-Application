@@ -21,6 +21,14 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
+    public User(String email, String password, String firstName, String lastName, String imageUrl) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.imageUrl = imageUrl;
+    }
+
     public User(Long id, String username, String email, String password, String firstName, String lastName, String imageUrl) {
         this.id = id;
         this.username = username;

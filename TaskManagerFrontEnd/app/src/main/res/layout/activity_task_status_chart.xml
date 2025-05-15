@@ -8,7 +8,7 @@
     android:background="@drawable/login_background"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".Login">
+    tools:context=".TaskStatusChart">
 
     <LinearLayout
         android:layout_width="320dp"
@@ -25,12 +25,10 @@
             android:text="Task Status Distribution"
             android:textColor="#FFFDD0"
             android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:gravity="center"/>
 
         <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pieChart"
+            android:id="@+id/PieChart"
             android:layout_width="match_parent"
             android:layout_height="492dp" />
     </LinearLayout>

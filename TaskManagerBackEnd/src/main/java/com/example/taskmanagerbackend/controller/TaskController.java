@@ -1,5 +1,6 @@
 package com.example.taskmanagerbackend.controller;
 
+import com.example.taskmanagerbackend.model.GetStatus;
 import com.example.taskmanagerbackend.model.Task;
 import com.example.taskmanagerbackend.model.TaskStatus;
 import com.example.taskmanagerbackend.service.TaskService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -121,5 +123,11 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
         }
         return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/status/count")
+    public ResponseEntity<List<GetStatus>> getTaskCountByStatus() {
+        List<GetStatus> statusCounts = taskService.getTaskCountByStatus(); // Gọi service để lấy số lượng theo trạng thái
+        return new ResponseEntity<>(statusCounts, HttpStatus.OK);
     }
 }

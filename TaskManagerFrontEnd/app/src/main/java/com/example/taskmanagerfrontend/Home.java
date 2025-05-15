@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,9 @@ public class Home extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
 
+    private TextView txtHelloUser;  // Add TextView to show "Hello + username"
+    private String userName = Login.UserName; // Assuming you get the username from Login class
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,8 @@ public class Home extends AppCompatActivity {
         // Initialize views
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         recyclerView = findViewById(R.id.recyclerViewCategory);
+        txtHelloUser = findViewById(R.id.txtHelloUser);  // Initialize TextView
+
         FloatingActionButton addTask = findViewById(R.id.fabAdd);
 
         // Get userId from SharedPreferences
@@ -46,6 +52,11 @@ public class Home extends AppCompatActivity {
         if (userId == null) {
             Toast.makeText(this, "User ID not found. Please log in again.", Toast.LENGTH_SHORT).show();
             // Optionally, navigate to login screen
+        }
+
+        // Display "Hello + userName" in the TextView
+        if (userName != null) {
+            txtHelloUser.setText("Hello, " + userName); // Display "Hello + username"
         }
 
         // Set up RecyclerView

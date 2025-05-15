@@ -59,7 +59,7 @@
             android:padding="16dp"
             android:background="@drawable/login_background"
             android:textColor="@color/white"
-            android:text="Hello Hao"
+            android:text="Task Manager"
             android:textStyle="bold" />
         
         <LinearLayout

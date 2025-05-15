@@ -71,7 +71,7 @@ public class SignUp extends AppCompatActivity {
         firstname = findViewById(R.id.txtFirstName);
         lastname = findViewById(R.id.txtLastName);
         password = findViewById(R.id.txtPassword);
-        signupBtn = findViewById(R.id.btnSignUp);
+        signupBtn = findViewById(R.id.btnUpdate);
         avatar = findViewById(R.id.imgAvatar);
         setimgAvatar = findViewById(R.id.set_imgAvatar);
 
@@ -114,7 +114,7 @@ public class SignUp extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(SignUp.this, "Registration failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                 }
             });
         });

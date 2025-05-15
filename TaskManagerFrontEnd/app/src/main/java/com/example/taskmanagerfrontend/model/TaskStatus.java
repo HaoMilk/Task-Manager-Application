@@ -1,8 +1,8 @@
-package com.example.taskmanagerfrontend.model;
+    package com.example.taskmanagerfrontend.model;
 
-public enum TaskStatus {
-    PENDING,
-    IN_PROGRESS,
-    COMPLETED,
-    OVERDUE
-}
+    public enum TaskStatus {
+        PENDING,
+        IN_PROGRESS,
+        COMPLETED,
+        OVERDUE
+    }

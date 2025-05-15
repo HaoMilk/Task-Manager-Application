@@ -1,5 +1,6 @@
 package com.example.taskmanagerbackend.service;
 
+import com.example.taskmanagerbackend.model.GetStatus;
 import com.example.taskmanagerbackend.model.Task;
 import com.example.taskmanagerbackend.model.TaskCategory;
 import com.example.taskmanagerbackend.model.TaskStatus;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -119,6 +121,16 @@ public class TaskService {
     // Method in TaskService
     public Iterable<Task> getTasksByCategoryId(int categoryId) {
         return taskRepository.findByCategoryId(categoryId);  // Giả sử bạn có một phương thức trong repository để tìm theo categoryId
+    }
+    public List<GetStatus> getTaskCountByStatus() {
+        List<GetStatus> statusCounts = new ArrayList<>();
+
+        for (TaskStatus status : TaskStatus.values()) {
+            int count = taskRepository.countByStatus(status);  // Giả sử bạn có phương thức trong repository để đếm task theo trạng thái
+            statusCounts.add(new GetStatus(status.name(), count)); // Trả về danh sách các trạng thái và số lượng
+        }
+
+        return statusCounts;
     }
 
 }
