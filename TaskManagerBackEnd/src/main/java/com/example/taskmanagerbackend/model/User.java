@@ -7,9 +7,10 @@ import lombok.Data;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;  // Sửa từ int -> Long để đồng bộ với repository
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -20,17 +21,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
 
-//    @OneToMany(mappedBy = "user")
-//    private Set<Task> tasks;
-
-//    @OneToMany(mappedBy = "user")
-//    private Set<TaskComment> comments;
-
-    public User() {
-
-    }
+    @Column(name = "image_url")
+    private String imageUrl;
 }
-

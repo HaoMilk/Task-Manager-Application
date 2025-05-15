@@ -8,7 +8,10 @@ import com.example.taskmanagerbackend.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -24,6 +27,16 @@ public class TaskService {
 
     // Add a new Task
     public Task addTask(Task task) {
+        // Kiểm tra dữ liệu bắt buộc không được null
+        if (task.getUser() == null || task.getCategory() == null || task.getTitle() == null) {
+            throw new IllegalArgumentException("User, category and title must not be null");
+        }
+        // Kiểm tra ngày hợp lệ: startDatetime không được sau endDatetime (nếu có)
+        if (task.getStartDatetime() != null && task.getEndDatetime() != null) {
+            if (task.getStartDatetime().after(task.getEndDatetime())) {
+                throw new IllegalArgumentException("Start datetime must not be after end datetime");
+            }
+        }
         return taskRepository.save(task);
     }
 
@@ -32,13 +45,22 @@ public class TaskService {
         Optional<Task> taskOptional = taskRepository.findById(taskId);
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
-            task.setTitle(taskDetails.getTitle());
-            task.setDescription(taskDetails.getDescription());
-            task.setStartDatetime(taskDetails.getStartDatetime());
-            task.setEndDatetime(taskDetails.getEndDatetime());
-            task.setStatus(taskDetails.getStatus());
-            task.setUser(taskDetails.getUser());
-            task.setCategory(taskDetails.getCategory());
+            // Cập nhật từng trường nếu không null
+            if (taskDetails.getTitle() != null) task.setTitle(taskDetails.getTitle());
+            if (taskDetails.getDescription() != null) task.setDescription(taskDetails.getDescription());
+            if (taskDetails.getStartDatetime() != null) task.setStartDatetime(taskDetails.getStartDatetime());
+            if (taskDetails.getEndDatetime() != null) task.setEndDatetime(taskDetails.getEndDatetime());
+            if (taskDetails.getStatus() != null) task.setStatus(taskDetails.getStatus());
+            if (taskDetails.getUser() != null) task.setUser(taskDetails.getUser());
+            if (taskDetails.getCategory() != null) task.setCategory(taskDetails.getCategory());
+
+            // Kiểm tra ngày hợp lệ sau khi cập nhật
+            if (task.getStartDatetime() != null && task.getEndDatetime() != null) {
+                if (task.getStartDatetime().after(task.getEndDatetime())) {
+                    throw new IllegalArgumentException("Start datetime must not be after end datetime");
+                }
+            }
+
             return taskRepository.save(task);
         }
         return null;
@@ -59,7 +81,7 @@ public class TaskService {
         return taskRepository.findById(taskId);
     }
 
-    // Get all tasks (optional, depending on needs)
+    // Get all tasks
     public Iterable<Task> getAllTasks() {
         return taskRepository.findAll();
     }
@@ -75,11 +97,32 @@ public class TaskService {
         if (taskCategory.isPresent()) {
             return taskRepository.findByCategory(taskCategory.get());
         }
-        return null;  // Trả về null nếu không tìm thấy category
+        // Trả về danh sách rỗng thay vì null
+        return java.util.Collections.emptyList();
     }
 
     // Lấy Task theo status
     public Iterable<Task> getTasksByStatus(TaskStatus status) {
         return taskRepository.findByStatus(status);
+    }
+    public Iterable<Task> getTasksByStartDate(LocalDate startDate) {
+        // Giả sử trong Task entity startDatetime là java.util.Date hoặc java.time.LocalDateTime,
+        // nhưng bạn truyền vào là LocalDate (không có giờ phút giây).
+        // Vì vậy, cần lọc các task có startDatetime thuộc đúng ngày startDate.
+
+        // Nếu startDatetime là java.util.Date hoặc java.time.LocalDateTime,
+        // bạn có thể convert sang LocalDate rồi so sánh.
+
+        List<Task> tasks = taskRepository.findAll();
+
+        return tasks.stream()
+                .filter(task -> {
+                    if (task.getStartDatetime() == null) return false;
+                    // Giả sử startDatetime là java.util.Date:
+                    LocalDate taskStartDate = task.getStartDatetime().toInstant()
+                            .atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+                    return taskStartDate.equals(startDate);
+                })
+                .collect(Collectors.toList());
     }
 }
