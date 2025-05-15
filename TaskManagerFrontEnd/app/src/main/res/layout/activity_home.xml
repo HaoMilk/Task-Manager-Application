@@ -57,11 +57,11 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:padding="16dp"
-            android:background="@color/white"
-            android:textColor="@color/black"
+            android:background="@drawable/login_background"
+            android:textColor="@color/white"
             android:text="Hello Hao"
             android:textStyle="bold" />
-
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="533dp"
