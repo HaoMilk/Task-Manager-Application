@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.TaskAdapter;
-import model.Task;
+import com.example.taskmanagerfrontend.adapter.TaskAdapter;
+import com.example.taskmanagerfrontend.model.Task;
 
 public class SearchTask extends AppCompatActivity {
 

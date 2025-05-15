@@ -1,4 +1,4 @@
-package model;
+package com.example.taskmanagerfrontend.model;
 
 public enum TaskStatus {
     PENDING,

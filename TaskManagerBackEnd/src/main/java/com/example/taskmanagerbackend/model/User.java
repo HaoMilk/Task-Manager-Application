@@ -10,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // Sửa từ int -> Long để đồng bộ với repository
+    private Integer id;  // Sửa từ int -> Long để đồng bộ với repository
 
     @Column(unique = true, nullable = false)
     private String username;

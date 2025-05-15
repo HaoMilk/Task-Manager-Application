@@ -1,4 +1,4 @@
-package model;
+package com.example.taskmanagerfrontend.model;
 
 public class TaskCategory {
     private int id;

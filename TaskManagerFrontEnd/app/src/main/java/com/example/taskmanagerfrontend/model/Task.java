@@ -1,4 +1,4 @@
-package model;
+package com.example.taskmanagerfrontend.model;
 
 import java.util.Date;
 

@@ -33,7 +33,7 @@ public class TaskService {
         }
         // Kiểm tra ngày hợp lệ: startDatetime không được sau endDatetime (nếu có)
         if (task.getStartDatetime() != null && task.getEndDatetime() != null) {
-            if (task.getStartDatetime().after(task.getEndDatetime())) {
+            if (task.getStartDatetime().isAfter(task.getEndDatetime())) {
                 throw new IllegalArgumentException("Start datetime must not be after end datetime");
             }
         }
@@ -56,7 +56,7 @@ public class TaskService {
 
             // Kiểm tra ngày hợp lệ sau khi cập nhật
             if (task.getStartDatetime() != null && task.getEndDatetime() != null) {
-                if (task.getStartDatetime().after(task.getEndDatetime())) {
+                if (task.getStartDatetime().isAfter(task.getEndDatetime())) {
                     throw new IllegalArgumentException("Start datetime must not be after end datetime");
                 }
             }
@@ -105,24 +105,11 @@ public class TaskService {
     public Iterable<Task> getTasksByStatus(TaskStatus status) {
         return taskRepository.findByStatus(status);
     }
+
+    // Lấy Task theo start date (bằng LocalDate)
     public Iterable<Task> getTasksByStartDate(LocalDate startDate) {
-        // Giả sử trong Task entity startDatetime là java.util.Date hoặc java.time.LocalDateTime,
-        // nhưng bạn truyền vào là LocalDate (không có giờ phút giây).
-        // Vì vậy, cần lọc các task có startDatetime thuộc đúng ngày startDate.
-
-        // Nếu startDatetime là java.util.Date hoặc java.time.LocalDateTime,
-        // bạn có thể convert sang LocalDate rồi so sánh.
-
-        List<Task> tasks = taskRepository.findAll();
-
-        return tasks.stream()
-                .filter(task -> {
-                    if (task.getStartDatetime() == null) return false;
-                    // Giả sử startDatetime là java.util.Date:
-                    LocalDate taskStartDate = task.getStartDatetime().toInstant()
-                            .atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-                    return taskStartDate.equals(startDate);
-                })
-                .collect(Collectors.toList());
+        // Truy vấn trực tiếp từ repository thay vì lọc trong bộ nhớ
+        return taskRepository.findByStartDatetime(startDate);
     }
 }
+

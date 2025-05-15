@@ -16,8 +16,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.CategoryAdapter;
-import model.TaskCategory;
+import com.example.taskmanagerfrontend.adapter.CategoryAdapter;
+import com.example.taskmanagerfrontend.model.TaskCategory;
 
 public class Home extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;

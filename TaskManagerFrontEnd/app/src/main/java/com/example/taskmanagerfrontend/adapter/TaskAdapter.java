@@ -1,4 +1,4 @@
-package adapter;
+package com.example.taskmanagerfrontend.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import com.example.taskmanagerfrontend.R;
 
 import java.util.List;
 
-import model.Task;
+import com.example.taskmanagerfrontend.model.Task;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 

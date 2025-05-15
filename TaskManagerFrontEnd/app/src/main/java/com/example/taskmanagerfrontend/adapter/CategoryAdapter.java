@@ -1,4 +1,4 @@
-package adapter;
+package com.example.taskmanagerfrontend.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import model.TaskCategory;
+import com.example.taskmanagerfrontend.model.TaskCategory;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 

@@ -51,6 +51,7 @@ public class AuthController {
     // Đăng nhập người dùng (so sánh thẳng password)
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User loginDetails) {
+        System.out.println("ABC");
         if (loginDetails.getUsername() == null || loginDetails.getUsername().isBlank() ||
                 loginDetails.getPassword() == null || loginDetails.getPassword().isBlank()) {
             return new ResponseEntity<>("Username and password are required", HttpStatus.BAD_REQUEST);

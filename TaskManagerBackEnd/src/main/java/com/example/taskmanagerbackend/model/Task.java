@@ -5,13 +5,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "tasks")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Ignore Hibernate Lazy Proxy
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +24,11 @@ public class Task {
 
     private String description;
 
-    private Date startDatetime;
+    @Column(name = "start_datetime")
+    private LocalDate startDatetime; // Chuyển từ Date sang LocalDate
 
-    private Date endDatetime;
+    @Column(name = "end_datetime")
+    private LocalDate endDatetime; // Chuyển từ Date sang LocalDate
 
     @Enumerated(EnumType.STRING)
     private TaskStatus status = TaskStatus.PENDING;
