@@ -1,11 +1,13 @@
 package com.example.taskmanagerfrontend;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
+    public static String UserID;
 
     private EditText username, password;
     private Button loginBtn;
@@ -62,6 +65,16 @@ public class Login extends AppCompatActivity {
 
                         if ("Login successful".equals(res.get("message"))) {
                             String token = res.get("token");
+                            UserID = res.get("userId"); // Giả sử API trả về userId
+
+                            // Lưu id người dùng và token vào SharedPreferences
+                            SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("userId", UserID);  // Lưu id người dùng
+                            editor.putString("token", token);  // Lưu token
+                            editor.apply();  // Lưu thay đổi
+
+                            // Chuyển sang màn hình Home
                             Intent intent = new Intent(Login.this, Home.class);
                             startActivity(intent);
                             finish();

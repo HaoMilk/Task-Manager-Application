@@ -111,5 +111,15 @@ public class TaskService {
         // Truy vấn trực tiếp từ repository thay vì lọc trong bộ nhớ
         return taskRepository.findByStartDatetime(startDate);
     }
+
+    public int getTaskCountByCategoryId(Long categoryId) {
+        return taskRepository.countByCategoryId(categoryId); // Giả sử bạn có phương thức countByCategoryId
+    }
+
+    // Method in TaskService
+    public Iterable<Task> getTasksByCategoryId(int categoryId) {
+        return taskRepository.findByCategoryId(categoryId);  // Giả sử bạn có một phương thức trong repository để tìm theo categoryId
+    }
+
 }
 

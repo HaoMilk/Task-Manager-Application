@@ -16,7 +16,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/titile_task"
+            android:id="@+id/title_task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"

@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/tasks")
+    @RequestMapping("/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;
@@ -76,14 +76,14 @@ public class TaskController {
 
 
     // Get tasks by category
-    @GetMapping("/category/{category}")
-    public ResponseEntity<Iterable<Task>> getTasksByCategory(@PathVariable String category) {
-        Iterable<Task> tasks = taskService.getTasksByCategory(category);
-        if (tasks == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
-        }
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
-    }
+//    @GetMapping("/category/{category}")
+//    public ResponseEntity<Iterable<Task>> getTasksByCategory(@PathVariable String category) {
+//        Iterable<Task> tasks = taskService.getTasksByCategory(category);
+//        if (tasks == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
+//        }
+//        return new ResponseEntity<>(tasks, HttpStatus.OK);
+//    }
 
     // Get tasks by status
     @GetMapping("/status/{status}")
@@ -110,6 +110,15 @@ public class TaskController {
         Iterable<Task> tasks = taskService.getTasksByStartDate(date);
         if (tasks == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<Iterable<Task>> getTasksByCategory(@PathVariable int categoryId) {
+        Iterable<Task> tasks = taskService.getTasksByCategoryId(categoryId);
+        if (tasks == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
         }
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }

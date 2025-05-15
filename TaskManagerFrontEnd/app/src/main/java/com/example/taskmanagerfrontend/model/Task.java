@@ -6,11 +6,21 @@ public class Task {
     private Integer id;
     private String title;
     private String description;
-    private Date startDatetime;
-    private Date endDatetime;
+    private String startDatetime;
+    private String endDatetime;
     private TaskStatus status = TaskStatus.PENDING;
     private User user;
     private TaskCategory category;
+
+    public Task(String title, String description, String startDatetime, String endDatetime, TaskStatus status, User user, TaskCategory category) {
+        this.title = title;
+        this.description = description;
+        this.startDatetime = startDatetime;
+        this.endDatetime = endDatetime;
+        this.status = status;
+        this.user = user;
+        this.category = category;
+    }
 
     public Task() {
     }
@@ -20,14 +30,20 @@ public class Task {
         this.description = description;
     }
 
-    public Task(String title, String description, Date startDatetime, Date endDatetime, TaskStatus status, User user, TaskCategory category) {
-        this.title = title;
-        this.description = description;
-        this.startDatetime = startDatetime;
+    public String getEndDatetime() {
+        return endDatetime;
+    }
+
+    public void setEndDatetime(String endDatetime) {
         this.endDatetime = endDatetime;
-        this.status = status;
-        this.user = user;
-        this.category = category;
+    }
+
+    public String getStartDatetime() {
+        return startDatetime;
+    }
+
+    public void setStartDatetime(String startDatetime) {
+        this.startDatetime = startDatetime;
     }
 
     public Integer getId() {
@@ -54,21 +70,6 @@ public class Task {
         this.description = description;
     }
 
-    public Date getStartDatetime() {
-        return startDatetime;
-    }
-
-    public void setStartDatetime(Date startDatetime) {
-        this.startDatetime = startDatetime;
-    }
-
-    public Date getEndDatetime() {
-        return endDatetime;
-    }
-
-    public void setEndDatetime(Date endDatetime) {
-        this.endDatetime = endDatetime;
-    }
 
     public TaskStatus getStatus() {
         return status;

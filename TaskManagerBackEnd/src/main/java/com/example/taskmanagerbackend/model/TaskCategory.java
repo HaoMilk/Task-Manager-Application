@@ -17,4 +17,5 @@ public class TaskCategory {
 
         @Column(name = "image_url")
         private String imageUrl;
+
 }

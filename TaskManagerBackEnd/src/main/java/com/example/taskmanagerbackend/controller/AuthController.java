@@ -48,7 +48,6 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
 
-    // Đăng nhập người dùng (so sánh thẳng password)
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User loginDetails) {
         System.out.println("ABC");
@@ -57,19 +56,25 @@ public class AuthController {
             return new ResponseEntity<>("Username and password are required", HttpStatus.BAD_REQUEST);
         }
 
+        // Tìm người dùng theo username
         Optional<User> userOpt = usersRepository.findByUsername(loginDetails.getUsername());
 
+        // Kiểm tra thông tin đăng nhập
         if (userOpt.isPresent() && loginDetails.getPassword().equals(userOpt.get().getPassword())) {
-            String token = jwtUtil.generateToken(userOpt.get().getUsername());
+            User user = userOpt.get();
+            String token = jwtUtil.generateToken(user.getUsername());
 
+            // Trả về thông báo, token và userId
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful",
-                    "token", token
+                    "token", token,
+                    "userId", user.getId()  // Trả về userId
             ));
         } else {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
     }
+
 
     // Cập nhật thông tin người dùng (bỏ mã hoá password)
     @PutMapping("/update/{id}")
