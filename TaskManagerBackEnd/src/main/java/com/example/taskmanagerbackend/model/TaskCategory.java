@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "task_categories")
-
 public class TaskCategory {
 
         @Id
@@ -16,6 +15,6 @@ public class TaskCategory {
         @Column(nullable = false)
         private String name;
 
-        // Getters and Setter
-
+        @Column(name = "image_url")
+        private String imageUrl;
 }

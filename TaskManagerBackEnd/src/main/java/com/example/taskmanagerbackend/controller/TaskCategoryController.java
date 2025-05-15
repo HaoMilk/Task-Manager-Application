@@ -28,6 +28,7 @@ public class TaskCategoryController {
         }
     }
 
+
     // Cập nhật một TaskCategory
     @PutMapping("/{id}")
     public ResponseEntity<TaskCategory> updateCategory(@PathVariable("id") Long id, @RequestBody TaskCategory taskCategory) {
@@ -55,11 +56,15 @@ public class TaskCategoryController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // Xóa một TaskCategory
+    // Xoá một TaskCategory theo id
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
-        taskCategoryService.deleteCategory(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) throws Exception {
+        Optional<TaskCategory> existingCategory = taskCategoryService.findCategoryById(id);
+        if (existingCategory.isPresent()) {
+            taskCategoryService.deleteCategory(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

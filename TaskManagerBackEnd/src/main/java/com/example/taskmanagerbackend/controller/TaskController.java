@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 @RestController
@@ -93,6 +95,22 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);  // If the status is invalid, return BAD_REQUEST
         }
         Iterable<Task> tasks = taskService.getTasksByStatus(taskStatus);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/startDate/{startDate}")
+    public ResponseEntity<Iterable<Task>> getTasksByStartDate(@PathVariable String startDate) {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(startDate);  // parse chuỗi ngày thành LocalDate
+        } catch (DateTimeParseException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // nếu ngày không đúng định dạng
+        }
+
+        Iterable<Task> tasks = taskService.getTasksByStartDate(date);
+        if (tasks == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 }
