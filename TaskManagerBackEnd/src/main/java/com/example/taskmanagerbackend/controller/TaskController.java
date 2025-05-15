@@ -1,5 +1,6 @@
 package com.example.taskmanagerbackend.controller;
 
+import com.example.taskmanagerbackend.model.GetStatus;
 import com.example.taskmanagerbackend.model.Task;
 import com.example.taskmanagerbackend.model.TaskStatus;
 import com.example.taskmanagerbackend.service.TaskService;
@@ -10,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/tasks")
+    @RequestMapping("/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;
@@ -76,14 +78,14 @@ public class TaskController {
 
 
     // Get tasks by category
-    @GetMapping("/category/{category}")
-    public ResponseEntity<Iterable<Task>> getTasksByCategory(@PathVariable String category) {
-        Iterable<Task> tasks = taskService.getTasksByCategory(category);
-        if (tasks == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
-        }
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
-    }
+//    @GetMapping("/category/{category}")
+//    public ResponseEntity<Iterable<Task>> getTasksByCategory(@PathVariable String category) {
+//        Iterable<Task> tasks = taskService.getTasksByCategory(category);
+//        if (tasks == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
+//        }
+//        return new ResponseEntity<>(tasks, HttpStatus.OK);
+//    }
 
     // Get tasks by status
     @GetMapping("/status/{status}")
@@ -112,5 +114,20 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<Iterable<Task>> getTasksByCategory(@PathVariable int categoryId) {
+        Iterable<Task> tasks = taskService.getTasksByCategoryId(categoryId);
+        if (tasks == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Trả về lỗi nếu không tìm thấy category
+        }
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/status/count")
+    public ResponseEntity<List<GetStatus>> getTaskCountByStatus() {
+        List<GetStatus> statusCounts = taskService.getTaskCountByStatus(); // Gọi service để lấy số lượng theo trạng thái
+        return new ResponseEntity<>(statusCounts, HttpStatus.OK);
     }
 }

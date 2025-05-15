@@ -14,6 +14,10 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findByCategory(TaskCategory category);
     List<Task> findByStatus(TaskStatus status);
     boolean existsByCategory(TaskCategory category);
-    // Thêm phương thức tìm task theo ngày bắt đầu
-    List<Task> findByStartDate(LocalDate startDate);
+    int countByCategoryId(Long categoryId);
+    // Query để lấy danh sách các tasks theo categoryId
+    List<Task> findByCategoryId(int categoryId);    // Tìm Task theo ngày bắt đầu
+    int countByStatus(TaskStatus status);
+    List<Task> findByStartDatetime(LocalDate startDatetime); // Thay vì findByStartDate
 }
+

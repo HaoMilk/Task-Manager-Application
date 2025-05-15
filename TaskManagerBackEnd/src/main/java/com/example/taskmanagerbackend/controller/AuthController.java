@@ -48,7 +48,7 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
 
-    // Đăng nhập người dùng (so sánh thẳng password)
+    // Đăng nhập người dùng
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User loginDetails) {
         if (loginDetails.getUsername() == null || loginDetails.getUsername().isBlank() ||
@@ -56,21 +56,27 @@ public class AuthController {
             return new ResponseEntity<>("Username and password are required", HttpStatus.BAD_REQUEST);
         }
 
+        // Tìm người dùng theo username
         Optional<User> userOpt = usersRepository.findByUsername(loginDetails.getUsername());
 
+        // Kiểm tra thông tin đăng nhập
         if (userOpt.isPresent() && loginDetails.getPassword().equals(userOpt.get().getPassword())) {
-            String token = jwtUtil.generateToken(userOpt.get().getUsername());
+            User user = userOpt.get();
+            String token = jwtUtil.generateToken(user.getUsername());
 
+            // Trả về thông báo, token và userId
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful",
-                    "token", token
+                    "token", token,
+                    "userId", user.getId(),  // Trả về userId
+                    "username", user.getUsername()  // Trả về username
             ));
         } else {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         }
     }
 
-    // Cập nhật thông tin người dùng (bỏ mã hoá password)
+    // Cập nhật thông tin người dùng
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         Optional<User> userOptional = usersRepository.findById(id);

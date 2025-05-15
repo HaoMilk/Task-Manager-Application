@@ -2,6 +2,7 @@ package com.example.taskmanagerbackend.controller;
 
 import com.example.taskmanagerbackend.model.TaskCategory;
 import com.example.taskmanagerbackend.service.TaskCategoryService;
+import com.example.taskmanagerbackend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,8 @@ public class TaskCategoryController {
 
     @Autowired
     private TaskCategoryService taskCategoryService;
-
+    @Autowired
+    private TaskService taskService;
     // Thêm một TaskCategory mới
     @PostMapping
     public ResponseEntity<TaskCategory> createCategory(@RequestBody TaskCategory taskCategory) {
@@ -65,6 +67,17 @@ public class TaskCategoryController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{id}/task-count")
+    public ResponseEntity<Integer> getTaskCount(@PathVariable("id") Long categoryId) {
+        try {
+            // Gọi service để lấy số lượng task cho category
+            int taskCount = taskService.getTaskCountByCategoryId(categoryId);
+            return new ResponseEntity<>(taskCount, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(0, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

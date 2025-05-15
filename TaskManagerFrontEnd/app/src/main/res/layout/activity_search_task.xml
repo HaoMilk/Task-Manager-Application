@@ -17,10 +17,11 @@
         android:orientation="vertical">
 
         <DatePicker
-            android:id="@+id/datePickerNew"
+            android:id="@+id/datePickerStartDate"
             android:layout_width="wrap_content"
             android:layout_height="413dp"
             android:background="@drawable/background_search_task"
+            android:calendarTextColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

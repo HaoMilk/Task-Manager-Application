@@ -59,7 +59,7 @@
             android:padding="16dp"
             android:background="@drawable/login_background"
             android:textColor="@color/white"
-            android:text="Hello Hao"
+            android:text="Task Manager"
             android:textStyle="bold" />
         
         <LinearLayout
@@ -70,6 +70,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/row_category" />
