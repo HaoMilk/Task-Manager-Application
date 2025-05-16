@@ -20,6 +20,7 @@
 ### 🔑 2. **Quản Lý Tài Khoản** 
 - **Đăng nhập**: Cho phép người dùng đăng nhập vào ứng dụng bằng tài khoản đã đăng ký trước đó.
 - **Đăng ký**: Người dùng có thể tạo tài khoản mới để sử dụng ứng dụng.
+- **Chỉnh sửa**: Người dùng có thể cập nhập thông tin tài khoản
 
 ### 📊 3. **Thống Kê Hiệu Suất Làm Việc** 
 - Hiển thị các thống kê về hiệu suất công việc của người dùng dựa trên các công việc đã hoàn thành và tiến độ công việc.
