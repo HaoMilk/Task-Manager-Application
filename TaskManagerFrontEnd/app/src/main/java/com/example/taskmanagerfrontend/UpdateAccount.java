@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,11 +30,14 @@ public class UpdateAccount extends AppCompatActivity {
 
     private ImageView imgAvatar;
     private Button btnUpdate;
-    private int userId = Integer.parseInt(Login.UserID); // Chuyển đổi từ String sang int
+
+    private EditText txtUsername, txtEmail, txtFirstName, txtLastName, txtPassword;
+
+    private int userId = Integer.parseInt(Login.UserID);
     private AuthApi authApi;
     private Uri selectedImageUri;
+    private String currentImageUrl; // Lưu url ảnh hiện tại (nếu không đổi ảnh thì giữ nguyên)
 
-    // Dùng ActivityResultLauncher để chọn ảnh
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -60,65 +64,45 @@ public class UpdateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_account);
 
-        // Khởi tạo Retrofit
         authApi = ApiClient.getRetrofitInstance().create(AuthApi.class);
 
-        // Gán View
         imgAvatar = findViewById(R.id.setImgAvt);
         btnUpdate = findViewById(R.id.btnUpdate);
 
-        // Lấy thông tin người dùng từ backend và hiển thị ảnh đại diện hiện tại
+        txtUsername = findViewById(R.id.txtUsername);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtFirstName = findViewById(R.id.txtFirstName);
+        txtLastName = findViewById(R.id.txtLastName);
+        txtPassword = findViewById(R.id.txtPassword);
+
         getUserInfo();
 
-        // Click chọn ảnh
         imgAvatar.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
             imagePickerLauncher.launch(intent);
         });
 
-        // Click cập nhật chỉ với ảnh đại diện
         btnUpdate.setOnClickListener(v -> {
-            // Kiểm tra xem người dùng đã chọn ảnh chưa
-            if (selectedImageUri == null) {
-                Toast.makeText(UpdateAccount.this, "Please select an avatar", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            String imgUrl = selectedImageUri != null ? selectedImageUri.toString() : "abc";  // Chuyển Uri thành String
-
-            // Gửi yêu cầu cập nhật chỉ ảnh đại diện đến server backend với userId và imageUri
-            Call<String> call = authApi.updateAvatar(userId, imgUrl);
-            call.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(UpdateAccount.this, "Avatar updated successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(UpdateAccount.this, "Update failed: " + response.message(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(UpdateAccount.this, "Update failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            updateUserInfo();
         });
     }
 
-    // Lấy thông tin người dùng từ API
     private void getUserInfo() {
-        // Gọi API lấy thông tin người dùng dựa trên userId
         Call<User> call = authApi.getUser(userId);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     User user = response.body();
-                    if (user.getImageUrl() != null && !user.getImageUrl().isEmpty()) {
-                        Uri imageUri = Uri.parse(user.getImageUrl());
-                        imgAvatar.setImageURI(imageUri);  // Hiển thị ảnh đại diện hiện tại
+                    txtUsername.setText(user.getUsername());
+                    txtEmail.setText(user.getEmail());
+                    txtFirstName.setText(user.getFirstName());
+                    txtLastName.setText(user.getLastName());
+                    txtPassword.setText(user.getPassword()); // Cân nhắc: không nên hiển thị mật khẩu thật trong app
+                    currentImageUrl = user.getImageUrl();
+                    if (currentImageUrl != null && !currentImageUrl.isEmpty()) {
+                        imgAvatar.setImageURI(Uri.parse(currentImageUrl));
                     }
                 } else {
                     Toast.makeText(UpdateAccount.this, "Failed to fetch user info: " + response.message(), Toast.LENGTH_SHORT).show();
@@ -131,4 +115,48 @@ public class UpdateAccount extends AppCompatActivity {
             }
         });
     }
+
+    private void updateUserInfo() {
+        String username = txtUsername.getText().toString().trim();
+        String email = txtEmail.getText().toString().trim();
+        String firstName = txtFirstName.getText().toString().trim();
+        String lastName = txtLastName.getText().toString().trim();
+        String password = txtPassword.getText().toString();
+
+        // Xử lý URL ảnh: nếu người dùng chọn ảnh mới thì lấy selectedImageUri, ngược lại giữ ảnh cũ
+        String imgUrl = currentImageUrl;
+        if (selectedImageUri != null) {
+            imgUrl = selectedImageUri.toString();
+        }
+
+        User updatedUser = new User(
+                userId * 1L, // Long id
+                username,
+                email,
+                password,
+                firstName,
+                lastName,
+                imgUrl
+        );
+
+        Call<User> call = authApi.updateUser(userId, updatedUser);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(UpdateAccount.this, "Update successful", Toast.LENGTH_SHORT).show();
+                    User updatedUser = response.body();
+                    // Bạn có thể cập nhật UI, lưu user mới nếu cần
+                } else {
+                    Toast.makeText(UpdateAccount.this, "Update failed: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(UpdateAccount.this, "Update failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+
