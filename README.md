@@ -10,40 +10,31 @@
 ## Mô Tả Dự Án
 Ứng dụng này giúp sinh viên quản lý công việc học tập, làm việc một cách hiệu quả bằng cách cung cấp các chức năng như thêm, sửa, xóa công việc, đăng nhập và đăng ký tài khoản, thống kê hiệu suất làm việc và phân loại công việc.
 
-![Ứng Dụng Quản Lý Công Việc](images/app_overview.png)
-
 ## Các Chức Năng Chính
 
-### 1. **Quản Lý Công Việc**
+### 1. **Quản Lý Công Việc** 📝
 - **Thêm công việc**: Sinh viên có thể thêm các công việc cần làm vào danh sách.
 - **Sửa công việc**: Cho phép chỉnh sửa thông tin công việc đã được lưu.
 - **Xóa công việc**: Xóa công việc không cần thiết khỏi danh sách.
 
-![Quản lý công việc](images/manage_tasks.png)
-
-### 2. **Quản Lý Tài Khoản**
+### 2. **Quản Lý Tài Khoản** 🔑
 - **Đăng nhập**: Cho phép người dùng đăng nhập vào ứng dụng bằng tài khoản đã đăng ký trước đó.
 - **Đăng ký**: Người dùng có thể tạo tài khoản mới để sử dụng ứng dụng.
 
-![Đăng nhập và đăng ký](images/login_signup.png)
-
-### 3. **Thống Kê Hiệu Suất Làm Việc**
+### 3. **Thống Kê Hiệu Suất Làm Việc** 📊
 - Hiển thị các thống kê về hiệu suất công việc của người dùng dựa trên các công việc đã hoàn thành và tiến độ công việc.
 
-![Thống kê hiệu suất](images/performance_stats.png)
-
-### 4. **Phân Loại Công Việc**
+### 4. **Phân Loại Công Việc** 📂
 - **Phân loại công việc**: Người dùng có thể phân loại công việc theo các thể loại khác nhau như học tập, công việc cá nhân, dự án nhóm, v.v.
 
-![Phân loại công việc](images/task_categories.png)
-
 ## Công Nghệ Sử Dụng
-- **Android Studio**: Công cụ phát triển chính cho ứng dụng.
-- **Java**: Ngôn ngữ lập trình sử dụng cho ứng dụng Android.
-- **SQLite**: Cơ sở dữ liệu lưu trữ công việc và tài khoản người dùng.
+- **Android Studio** 🛠️: Công cụ phát triển chính cho ứng dụng.
+- **Java** ☕: Ngôn ngữ lập trình sử dụng cho ứng dụng Android.
+- **SQLite** 🗄️: Cơ sở dữ liệu lưu trữ công việc và tài khoản người dùng.
 
 ## Cài Đặt
-1. **Clone repository**:
+1. **Clone repository**:  
+git clone https://github.com/HaoMilk/Task-Manager-Application.git
 
 2. **Mở dự án** trong Android Studio.
 
@@ -56,11 +47,11 @@
 4. Quản lý công việc của bạn qua các chức năng như sửa, xóa.
 5. Kiểm tra hiệu suất công việc của bạn qua phần thống kê.
 
-## Tương Lai Phát Triển
+## Tương Lai Phát Triển 🚀
 - Thêm tính năng nhắc nhở cho các công việc quan trọng.
 - Tích hợp lịch để người dùng dễ dàng xem lịch trình công việc.
 - Thêm tính năng đồng bộ hóa dữ liệu trên nhiều thiết bị.
 
-## Liên Hệ
+## Liên Hệ 📧
 - **Nguyễn Ngọc Kín Hào**: [Email](mailto:email@domain.com)
 - **Phan Lê Chí Khanh**: [Email](mailto:email@domain.com)
