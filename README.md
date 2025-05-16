@@ -56,5 +56,5 @@ git clone https://github.com/HaoMilk/Task-Manager-Application.git
 - Thêm tính năng đồng bộ hóa dữ liệu trên nhiều thiết bị.
 
 ## 📧Liên Hệ 
-- **Nguyễn Ngọc Kín Hào**: [Email](mailto:22110314@student.hcmute.edu.vn)
-- **Phan Lê Chí Khanh**: [Email](mailto:22110348@student.hcmute.edu.vn)
+- **Nguyễn Ngọc Kín Hào**: 22110314@student.hcmute.edu.vn
+- **Phan Lê Chí Khanh**: 22110348@student.hcmute.edu.vn
