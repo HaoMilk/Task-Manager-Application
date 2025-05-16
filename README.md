@@ -1,7 +1,7 @@
-# Ứng Dụng Quản Lý Công Việc Sinh Viên
+# Ứng Dụng Quản Lý Công Việc
 
 ## Nhóm 02
-### Đề Tài: Ứng Dụng Quản Lý Công Việc Sinh Viên
+### Đề Tài: Ứng Dụng Quản Lý Công Việc
 
 #### Thành viên thực hiện:
 - **Nguyễn Ngọc Kín Hào** - 22110314
