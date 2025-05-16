@@ -3,6 +3,7 @@ BÁO CÁO ĐỒ ÁN LẬP TRÌNH DI ĐỘNG ANDROID NHÓM 02
 SINH VIÊN THỰC HIỆN:
 
 Nguyễn Ngọc Kín Hào - 22110314
+
 Phan Lê Chí Khanh - 22113048
 
 CÁC CHỨC NĂNG CHÍNH:
