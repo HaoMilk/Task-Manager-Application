@@ -31,7 +31,6 @@ public class SignUp extends AppCompatActivity {
     private EditText username, email, firstname, lastname, password;
     private Button signupBtn;
     private ImageView avatar, setimgAvatar;
-
     private AuthApi authApi;
     private Uri selectedImageUri;
 
