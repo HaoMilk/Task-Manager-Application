@@ -74,11 +74,21 @@
             android:textSize="18sp"
             android:inputType="textPassword"
             android:layout_marginBottom="24dp" />
-
+        <ImageView
+            android:id="@+id/set_imgAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/img_avt_background"
+            android:padding="18dp"
+            android:src="@drawable/icon_image"
+            android:text="Add avatar"
+            android:textColor="#3B84F1"
+            android:textSize="20sp" />
         <Button
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:text="Update"
             android:backgroundTint="@color/white"
             android:textColor="#3B84F1"

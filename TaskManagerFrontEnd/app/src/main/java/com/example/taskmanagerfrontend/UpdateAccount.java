@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class UpdateAccount extends AppCompatActivity {
 
-    private ImageView imgAvatar;
+    private ImageView imgAvatar, btnChooseAvatar;
     private Button btnUpdate;
 
     private EditText txtUsername, txtEmail, txtFirstName, txtLastName, txtPassword;
@@ -36,7 +36,7 @@ public class UpdateAccount extends AppCompatActivity {
     private int userId = Integer.parseInt(Login.UserID);
     private AuthApi authApi;
     private Uri selectedImageUri;
-    private String currentImageUrl; // Lưu url ảnh hiện tại (nếu không đổi ảnh thì giữ nguyên)
+    private String currentImageUrl; // Lưu URL ảnh avatar hiện tại
 
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -51,9 +51,10 @@ public class UpdateAccount extends AppCompatActivity {
                             } else {
                                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                             }
-                            imgAvatar.setImageBitmap(bitmap);
+                            imgAvatar.setImageBitmap(bitmap);  // Hiển thị ảnh đại diện lớn
                         } catch (IOException e) {
                             e.printStackTrace();
+                            Toast.makeText(UpdateAccount.this, "Failed to load image", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -66,7 +67,8 @@ public class UpdateAccount extends AppCompatActivity {
 
         authApi = ApiClient.getRetrofitInstance().create(AuthApi.class);
 
-        imgAvatar = findViewById(R.id.setImgAvt);
+        imgAvatar = findViewById(R.id.setImgAvt);  // Avatar hiển thị
+        btnChooseAvatar = findViewById(R.id.set_imgAvatar);  // Button chọn avatar
         btnUpdate = findViewById(R.id.btnUpdate);
 
         txtUsername = findViewById(R.id.txtUsername);
@@ -75,19 +77,21 @@ public class UpdateAccount extends AppCompatActivity {
         txtLastName = findViewById(R.id.txtLastName);
         txtPassword = findViewById(R.id.txtPassword);
 
+        // Lấy thông tin user và hiển thị
         getUserInfo();
 
-        imgAvatar.setOnClickListener(v -> {
+        // Khi click vào ImageView nhỏ để chọn ảnh
+        btnChooseAvatar.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.setType("image/*");
             imagePickerLauncher.launch(intent);
         });
 
-        btnUpdate.setOnClickListener(v -> {
-            updateUserInfo();
-        });
+        // Nút cập nhật user
+        btnUpdate.setOnClickListener(v -> updateUserInfo());
     }
 
+    // Lấy dữ liệu user từ server để hiển thị lên UI
     private void getUserInfo() {
         Call<User> call = authApi.getUser(userId);
         call.enqueue(new Callback<User>() {
@@ -99,10 +103,13 @@ public class UpdateAccount extends AppCompatActivity {
                     txtEmail.setText(user.getEmail());
                     txtFirstName.setText(user.getFirstName());
                     txtLastName.setText(user.getLastName());
-                    txtPassword.setText(user.getPassword()); // Cân nhắc: không nên hiển thị mật khẩu thật trong app
-                    currentImageUrl = user.getImageUrl();
+                    txtPassword.setText(user.getPassword());  // Lưu ý: cân nhắc không hiển thị mật khẩu thật
+
+                    currentImageUrl = user.getImageUrl();  // Lấy URL ảnh hiện tại
                     if (currentImageUrl != null && !currentImageUrl.isEmpty()) {
-                        imgAvatar.setImageURI(Uri.parse(currentImageUrl));
+                        imgAvatar.setImageURI(Uri.parse(currentImageUrl));  // Hiển thị ảnh hiện tại
+                    } else {
+                        imgAvatar.setImageResource(R.drawable.icon_account_circle);  // Nếu không có ảnh, hiển thị icon mặc định
                     }
                 } else {
                     Toast.makeText(UpdateAccount.this, "Failed to fetch user info: " + response.message(), Toast.LENGTH_SHORT).show();
@@ -116,6 +123,7 @@ public class UpdateAccount extends AppCompatActivity {
         });
     }
 
+    // Cập nhật thông tin user (gửi lên server)
     private void updateUserInfo() {
         String username = txtUsername.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
@@ -123,14 +131,13 @@ public class UpdateAccount extends AppCompatActivity {
         String lastName = txtLastName.getText().toString().trim();
         String password = txtPassword.getText().toString();
 
-        // Xử lý URL ảnh: nếu người dùng chọn ảnh mới thì lấy selectedImageUri, ngược lại giữ ảnh cũ
-        String imgUrl = currentImageUrl;
+        String imgUrl = currentImageUrl;  // Giữ URL cũ nếu không thay đổi ảnh
         if (selectedImageUri != null) {
-            imgUrl = selectedImageUri.toString();
+            imgUrl = selectedImageUri.toString();  // Cập nhật URL mới nếu chọn ảnh mới
         }
 
         User updatedUser = new User(
-                userId * 1L, // Long id
+                userId * 1L,
                 username,
                 email,
                 password,
@@ -145,8 +152,7 @@ public class UpdateAccount extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(UpdateAccount.this, "Update successful", Toast.LENGTH_SHORT).show();
-                    User updatedUser = response.body();
-                    // Bạn có thể cập nhật UI, lưu user mới nếu cần
+                    // Bạn có thể cập nhật UI hoặc dữ liệu sau khi update thành công
                 } else {
                     Toast.makeText(UpdateAccount.this, "Update failed: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
@@ -159,4 +165,3 @@ public class UpdateAccount extends AppCompatActivity {
         });
     }
 }
-

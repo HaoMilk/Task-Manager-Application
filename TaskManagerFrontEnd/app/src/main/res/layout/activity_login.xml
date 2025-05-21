@@ -15,7 +15,17 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/txtHelloUser"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="24dp"
+            android:textColor="@color/white"
+            android:text="Task Manager"
+            android:textStyle="bold" />
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
@@ -46,7 +56,7 @@
             android:padding="18dp"
             android:inputType="text"
             android:id="@+id/txtPassword"/>
-        
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
