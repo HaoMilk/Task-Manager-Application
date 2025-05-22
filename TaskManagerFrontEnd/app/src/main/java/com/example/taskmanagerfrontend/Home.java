@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        ImageView imgNotification = findViewById(R.id.imgNotification);
         // Initialize views
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         recyclerView = findViewById(R.id.recyclerViewCategory);
@@ -86,6 +87,10 @@ public class Home extends AppCompatActivity {
 
         // Floating Action Button click listener
         addTask.setOnClickListener(v -> navigateToAddTask());
+        imgNotification.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, Notification.class);
+            startActivity(intent);
+        });
     }
 
     @Override
