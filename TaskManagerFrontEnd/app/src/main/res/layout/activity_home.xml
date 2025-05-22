@@ -49,25 +49,40 @@
         android:layout_height="607dp"
         android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/txtHelloUser"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:padding="16dp"
             android:background="@drawable/login_background"
-            android:textColor="@color/white"
-            android:text="Task Manager"
-            android:textStyle="bold" />
-        
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtHelloUser"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Task Manager"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgNotification"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/icons8_notification_50"
+                android:scrollbarSize="13dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="533dp"
             android:background="@color/white"
             android:orientation="vertical">
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewCategory"
@@ -75,7 +90,6 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/row_category" />
         </LinearLayout>
-
 
     </LinearLayout>
 

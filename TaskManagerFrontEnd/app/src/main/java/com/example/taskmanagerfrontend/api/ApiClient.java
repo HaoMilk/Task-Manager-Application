@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://196.169.4.107:8080";  // Địa chỉ IP của backend
+    private static final String BASE_URL = "http://192.168.68.244:8080";  // Địa chỉ IP của backend
 
     private static Retrofit retrofit;
 

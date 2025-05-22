@@ -36,6 +36,8 @@
         <activity
             android:name=".AddTask"
             android:exported="false" />
+        <activity android:name=".Notification" />
+
         <activity
             android:name=".Home"
             android:exported="false" />
